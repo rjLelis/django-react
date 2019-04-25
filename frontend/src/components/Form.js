@@ -50,7 +50,7 @@ class Form extends Component {
                         </div>
                     </div>
                     <div className="field">
-                        <label className="label">
+                        <label className="label">Email</label>
                             <div className="control">
                                 <input 
                                     className="input" 
@@ -61,10 +61,9 @@ class Form extends Component {
                                     required
                                 />
                             </div>
-                        </label>
                     </div>
                     <div className="field">
-                        <label className="label">
+                        <label className="label">Message</label>
                             <div className="control">
                                 <textarea 
                                     className="input" 
@@ -75,7 +74,6 @@ class Form extends Component {
                                     required
                                 />
                             </div>
-                        </label>
                     </div>
                     <div className="control">
                         <button type="submit" className="button is-info">
