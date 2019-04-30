@@ -13,15 +13,15 @@ class LeadListCreate(generics.ListCreateAPIView):
 def get_lead_by_id(request, leadId):
     lead = Lead.objects.get(id=leadId)
     lead_serializer = LeadSerializer(lead)
-    return Response({'Lead': lead_serializer.data })
+    return Response(lead_serializer.data)
 
 @api_view(['GET', 'POST'])
 def list_create_lead(request):
     if request.method == 'POST':
         lead = Lead(name=request.data['name'], email=request.data['email'], message=request.data['message'])
         lead.save()
-        serializer = LeadSerializer(lead)
-        return Response({ 'Lead': serializer.data })
+        lead_serializer = LeadSerializer(lead)
+        return Response(lead_serializer.data)
     leads = Lead.objects.all()
     leads_serializer = LeadSerializer(leads, many=True)
-    return Response({'Leads': leads_serializer.data})
+    return Response(leads_serializer.data)
