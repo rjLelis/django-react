@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 class Form extends Component {
 
     static propTypes = {
-        endpoint: PropTypes.string.isRequired
+        onSubmit: PropTypes.func.isRequired
     }
 
     state = {
@@ -18,24 +18,15 @@ class Form extends Component {
     };
 
     handleSubmit = e => {
-        e.preventDefault();
-        const { name, email, message } = this.state;
-        const lead = { name, email, message };
-        const conf = {
-            method: "POST",
-            body: JSON.stringify(lead),
-            headers: new Headers({ "Content-type": "application/json" })
-        };
-        fetch(this.props.endpoint, conf).then(response => console.log(response)).then(
-            this.setState({ name: "" , email: "" , message: "" })
-        );
-    };
+        this.props.onSubmit(e, this.state);
+        return this.setState({ name: "", email:"", message:"" })
+    }
 
     render() {
         const { name, email, message } = this.state;
         return (
             <div className="column">
-                <form onSubmit={this.handleSubmit}>
+                <form method="post">
                     <div className="field">
                         <label className="label">Name</label>
                         <div className="control">
@@ -76,7 +67,7 @@ class Form extends Component {
                             </div>
                     </div>
                     <div className="control">
-                        <button type="submit" className="button is-info">
+                        <button type="reset" className="button is-info" onClick={this.handleSubmit}>
                             Send message
                         </button>
                     </div>
